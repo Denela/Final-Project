@@ -1,16 +1,32 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { ConnectedUsernameDisplay } from './UsernameDisplay'
+import * as mutations from '../store/mutations';
 
 
-const Navigation = ()=>(
-    <div>
+const Navigation = ({id, authenticated})=>(
+    <div className="header" >
         <Link to="/dashboard" >
             <h1>
-                Home
+                Student Portal
             </h1>
         </Link>
+
+        {authenticated ?
+            <h4>
+                Welcome, <ConnectedUsernameDisplay id={id}/>!
+
+            </h4>
+            : null
+        }
     </div>
 );
 
-export const ConnectedNavigation = connect(state=>state) (Navigation);
+
+const mapStateToProps = ({session})=>({
+    id:session.id,
+    authenticated:session.authenticated == mutations.AUTHENTICATED
+});
+
+export const ConnectedNavigation = connect(mapStateToProps)(Navigation);

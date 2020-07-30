@@ -1,10 +1,24 @@
+import md5 from 'md5';
+
+// This object state kinda difenes everthing that the app needs for eaxh user to have  a unique experience
 export const defaultState = {
+  //session: {
+    //authenticated:false
+ // },
+  // A list of the registered users
   users: [
     {
       id: "User1",
       name: "Denela",
+      passwordHarsh:md5("TUPLES")
+    },
+    {
+      id: "User2",
+      name: "Boss",
+      passwordHarsh:md5("PROFITING")
     },
   ],
+  // This is where the tasks that are to be completed belong
   groups: [
     {
       name: "To Do",
@@ -22,6 +36,7 @@ export const defaultState = {
       owner: "User1",
     },
   ],
+  // The actual tasks which are either pending, being done, or done
   tasks: [
     {
       name: "Upload Your Documents",
@@ -52,6 +67,7 @@ export const defaultState = {
       isComplete: false,
     },
   ],
+  // A little bit of interraction that users and the univeristy can put comments
   comments: [
     {
       owner: "User1",
